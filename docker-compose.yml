@@ -22,7 +22,7 @@ services:
 
 
     webserver:
-        image: nginx:alpine
+        image: nginx:1.25.4-alpine
         container_name: webserver
         restart: unless-stopped
         tty: true
