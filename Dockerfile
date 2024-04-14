@@ -1,22 +1,33 @@
 FROM php:8.2-fpm
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    locales \
-    zip \
-    jpegoptim optipng pngquant gifsicle \
-    vim \
-    unzip \
+#RUN apt-get update && apt-get install -y \
+#    build-essential \
+#    libpng-dev \
+#    libjpeg62-turbo-dev \
+#    libfreetype6-dev \
+#    locales \
+#    zip \
+#    jpegoptim optipng pngquant gifsicle \
+#    vim \
+#    unzip \
+#    git \
+#    curl \
+#    && apt-get clean \
+#    && rm -rf /var/lib/apt/lists/*
+
+
+RUN apt update && apt install -y \
     git \
     curl \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev
 
 # Install extensions
+RUN apt clean && rm -rf /var/lib/apt/lists/*
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
 #RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 #RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
 #RUN docker-php-ext-install gd
