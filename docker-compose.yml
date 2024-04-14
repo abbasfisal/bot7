@@ -1,24 +1,24 @@
 version : '3.9'
 services:
     db:
-    image: mysql:8.3.0
-    container_name: db
-    restart: unless-stopped
-    tty: true
-    ports:
-        - "3306:3306"
+        image: mysql:8.3.0
+        container_name: db
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "3306:3306"
 
-    environment:
-          MYSQL_DATABASE: bot7db
-          MYSQL_ROOT_PASSWORD: root
-          SERVICE_TAGS: dev
-          SERVICE_NAME: mysql
-    volumes:
-        - dbdata:/var/lib/mysql/
-        - ./mysql/my.cnf:/etc/mysql/my.cnf
+        environment:
+              MYSQL_DATABASE: bot7db
+              MYSQL_ROOT_PASSWORD: root
+              SERVICE_TAGS: dev
+              SERVICE_NAME: mysql
+        volumes:
+            - dbdata:/var/lib/mysql/
+            - ./mysql/my.cnf:/etc/mysql/my.cnf
 
-    networks:
-        - app-network
+        networks:
+            - app-network
 
 #Docker Networks
 networks:
