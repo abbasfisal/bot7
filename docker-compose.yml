@@ -33,7 +33,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/:/etc/nginx/conf.d
       - .:/var/www/html
     depends_on:
       - php
