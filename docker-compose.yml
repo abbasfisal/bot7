@@ -1,46 +1,54 @@
-version : '3.9'
+version: '3'
 services:
-    db:
-        image: mysql:8.3.0
-        container_name: db
-        restart: unless-stopped
-        tty: true
-        ports:
-            - "3306:3306"
 
-        environment:
-              MYSQL_DATABASE: bot7db
-              MYSQL_ROOT_PASSWORD: root
-              SERVICE_TAGS: dev
-              SERVICE_NAME: mysql
-        volumes:
-            - dbdata:/var/lib/mysql/
-            - ./mysql/my.cnf:/etc/mysql/my.cnf
+  #PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    networks:
+      - app-network
 
-        networks:
-            - app-network
+  #Nginx Service
+  webserver:
+    image: nginx:1.25.4-alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - app-network
 
-
-    webserver:
-        image: nginx:1.25.4-alpine
-        container_name: webserver
-        restart: unless-stopped
-        tty: true
-        ports:
-          - "80:80"
-          - "443:443"
-        volumes:
-          - ./:/var/www
-          - ./nginx/conf.d/:/etc/nginx/conf.d/
-        networks:
-          - app-network
+  #MySQL Service
+  db:
+    image: mysql:8.3.0
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: bot7db
+      MYSQL_ROOT_PASSWORD: root
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - app-network
 
 #Docker Networks
 networks:
   app-network:
     driver: bridge
-#Volumes
+
 volumes:
   dbdata:
     driver: local
-
