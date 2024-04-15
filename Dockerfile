@@ -18,12 +18,11 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copy existing application directory contents
 COPY . .
 
-# Set permissions for Laravel storage and bootstrap directories
-RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html/storage
-
-
 # Install Composer dependencies
 RUN composer install
+
+# Set permissions for Laravel storage and bootstrap directories
+RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html/storage
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
