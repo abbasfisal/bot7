@@ -19,7 +19,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY . .
 
 # Set permissions for Laravel storage and bootstrap directories
-RUN chown -R root:root storage bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html/storage
+
 
 # Install Composer dependencies
 RUN composer install
