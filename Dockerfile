@@ -16,7 +16,7 @@ RUN apt-get update && \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Copy existing application directory contents
-COPY . .
+COPY --chown=www-data:www-data . .
 
 # Set permissions for Laravel directories
 #RUN chown -R www-data:www-data /var/www/html
