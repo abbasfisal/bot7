@@ -1,4 +1,4 @@
-FROM nginx:1.25.4-alpine
+FROM nginx:1.25.4
 
     ## Install certbot and nginx plugin
     #RUN apk add --no-cache certbot && \
