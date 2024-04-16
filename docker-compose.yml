@@ -14,8 +14,8 @@ services:
 
   # MySQL Service
   mysql:
-    container_name: bot7_mysql
     image: mysql:8.3.0
+    container_name: bot7_mysql
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: bot7db
