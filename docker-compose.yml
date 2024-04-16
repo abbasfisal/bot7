@@ -3,7 +3,7 @@ version: '3.8'
 services:
   # PHP Service
   php:
-    container_name: php
+    container_name: bot7_php
     build:
       context: .
       dockerfile: Dockerfile
@@ -14,7 +14,7 @@ services:
 
   # MySQL Service
   mysql:
-    container_name: mysql
+    container_name: bot7_mysql
     image: mysql:8.3.0
     restart: unless-stopped
     environment:
@@ -33,7 +33,7 @@ services:
     build:
         context: .
         dockerfile: ./nginx/Dockerfile
-    container_name: nginx
+    container_name: bot7_nginx
     ports:
       - "80:80"
       - "443:443"
