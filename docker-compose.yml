@@ -35,7 +35,6 @@ services:
         dockerfile: ./nginx/Dockerfile
     container_name: bot7_nginx
     ports:
-      - "80:80"
       - "443:443"
     volumes:
       - ./nginx/certs:/etc/nginx/certs
