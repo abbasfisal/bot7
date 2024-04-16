@@ -30,9 +30,9 @@ services:
 
   # Nginx Service
   nginx:
-    build:
-        context:.
-        dockerfile: ./nginx/
+     build:
+          context: .
+          dockerfile: ./nginx/Dockerfile
     #image: nginx:1.25.4-alpine
     container_name: nginx
     ports:
