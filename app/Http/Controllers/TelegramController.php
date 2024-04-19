@@ -40,13 +40,13 @@ class TelegramController extends Controller
                 'reply_markup' => $keyboard
             ];
         } else if ($text == self::WEATHER) {
-            if ($reply_text == self::CITYNAME) {
-                $replyData = ['text' => 'weather is rainy 🌧'];
-                return;
-            } else {
-                $replyData = ['text' => 'undefined command'];
-                return;
-            }
+//            if ($reply_text == self::CITYNAME) {
+//                $replyData = ['text' => 'weather is rainy 🌧'];
+//                return;
+//            } else {
+//                $replyData = ['text' => 'undefined command'];
+//                return;
+//            }
             $replyData = ['text' => self::CITYNAME];
         }
 
