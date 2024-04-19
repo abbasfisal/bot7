@@ -19,6 +19,7 @@ class TelegramController extends Controller
         $id = $tData['message']['chat']['id'] ?? null;
         $text = $tData  ['message']['text'] ?? null;
         $reply_to_message = $tData['message']['reply_to_message'] ?? null;
+        print_r('--------REPLYMESSAGE-----' , $reply_to_message);
         $firstName = $tData['message']['from']['first_name'] ?? null;
         $botToken = env("TELEGRAM_API");
 
