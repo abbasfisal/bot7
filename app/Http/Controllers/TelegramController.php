@@ -19,16 +19,16 @@ class TelegramController extends Controller
             'keyboard'        => [
                 [
                     [
-                        "text"          => "Yes",
+                        "text"          => "پیش بینی وضع آب و هوا🌤",
                         "callback_data" => "yes"
                     ],
                     [
                         [
-                            "text"          => "No",
+                            "text"          => "aboutUs",
                             "callback_data" => "no"
                         ],
                         [
-                            "text"          => "Stop",
+                            "text"          => "ContactUs",
                             "callback_data" => "stop"
                         ]
                     ]
