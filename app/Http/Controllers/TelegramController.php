@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use function PHPUnit\Framework\isNull;
 
 class TelegramController extends Controller
 {
@@ -40,7 +41,7 @@ class TelegramController extends Controller
             case self::WEATHER:
                 $replyData = ['text' => 'لطفا نام شهر مورد نظر را وارد نمایید...'];
                 break;
-            case $reply_to_message:
+            case !isNull($reply_to_message):
                 $replyData = ['text' => 'weather is good yoho'];
                 break;
             default :
