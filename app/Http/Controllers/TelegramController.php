@@ -16,7 +16,7 @@ class TelegramController extends Controller
         $botToken = env("TELEGRAM_API");
 
         switch ($text) {
-            case '\start' :
+            case '/start' :
                 $replyData = [
                     'text'         => 'سلام خوش آمدید',
                     'reply_markup' => [
