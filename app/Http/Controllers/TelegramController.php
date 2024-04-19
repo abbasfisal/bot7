@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class TelegramController extends Controller
 {
-    public function webhook(Request $request)
+    public function webhook(Request $r)
     {
-        \Log::info('request log ', $request->all());
-        $token = env('TELEGRAM_API');
-        $chat_id = env('USER_ID');
-        $data = Student::query()->first()->toArray();
-        var_dump($data);
-        $u = sprintf("https://api.telegram.org/bot%s/sendmessage?chat_id=%s&text=%s", $token, $chat_id, json_encode($data));
-        var_dump($u);
+        $re = $r->all();
+        $id = $re['message']['chat']['id'];
 
-        $result = Http::post('https://api.telegram.org/bot' . $token . '/sendmessage', ['chat_id' => $chat_id, 'text' => json_encode($data)]);
-        return $result;
+        $botToken = env("TELEGRAM_API");
+        $response = Http:: post("https://api.telegram.org/bot{$botToken}/sendmessage",
+            [
+                'chat_id' => $id,
+                'text'    => 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.britannica.com%2Fscience%2Fflower&psig=AOvVaw2TnltX_R2w5o5PUDdq9rP9&ust=1713625184779000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPCE-rTFzoUDFQAAAAAdAAAAABAE'
+            ]);
+
+        \Log::info('---- response ---- ', [$response->json()]);
 
     }
 }
