@@ -17,14 +17,18 @@ class TelegramController extends Controller
 
         switch ($text) {
             case '\start' :
-                $replyData = ['text'         => 'سلام خوش آمدید',
-                              'reply_markup' => [
-                                  'inline_keyboard' => [
-                                      ['text' => 'option1'],
-                                      ['text' => 'option2'],
-                                  ]
-                              ]
+                $replyData = [
+                    'text'         => 'سلام خوش آمدید',
+                    'reply_markup' => [
+                        'inline_keyboard' => [
+                            [
+                                ['text' => 'option1'],
+                                ['text' => 'option2'],
+                            ]
+                        ]
+                    ]
                 ];
+
                 break;
             case 'hi':
                 $replyData = ['text' => ' Hi How Are U :)'];
