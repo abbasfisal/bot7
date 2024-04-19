@@ -23,12 +23,14 @@ class TelegramController extends Controller
                         "callback_data" => "yes"
                     ],
                     [
-                        "text"          => "No",
-                        "callback_data" => "no"
-                    ],
-                    [
-                        "text"          => "Stop",
-                        "callback_data" => "stop"
+                        [
+                            "text"          => "No",
+                            "callback_data" => "no"
+                        ],
+                        [
+                            "text"          => "Stop",
+                            "callback_data" => "stop"
+                        ]
                     ]
                 ]
             ],
