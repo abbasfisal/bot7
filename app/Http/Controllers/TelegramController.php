@@ -16,24 +16,11 @@ class TelegramController extends Controller
         $botToken = env("TELEGRAM_API");
 
         $keyboard = json_encode([
-            'keyboard'        => [
-                [
-                    [
-                        "text"          => "پیش بینی وضع آب و هوا🌤",
-                        "callback_data" => "yes"
-                    ],
-                    [
-                        [
-                            "text"          => "aboutUs",
-                            "callback_data" => "no"
-                        ],
-                        [
-                            "text"          => "ContactUs",
-                            "callback_data" => "stop"
-                        ]
-                    ]
-                ]
-            ],
+            'keyboard' => [
+                ["پیش بینی وضع آب و هوا🌤"],
+                ["aboutUs", "ContactUs"]
+            ]
+        ], [
             'resize_keyboard' => true
         ]);
         switch ($text) {
