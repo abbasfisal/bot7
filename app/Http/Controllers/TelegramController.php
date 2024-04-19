@@ -24,9 +24,8 @@ class TelegramController extends Controller
 
         }
         $response = Http:: post("https://api.telegram.org/bot{$botToken}/sendmessage",
-            [
-                array_merge(['chat_id' => $id], $replyData)
-            ]);
+            array_merge(['chat_id' => $id], $replyData)
+        );
 
         \Log::info('---- response ---- ', [$response->json()]);
 
