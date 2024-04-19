@@ -33,21 +33,18 @@ class TelegramController extends Controller
             'resize_keyboard' => true
         ]);
 
-        $replyData = [];
+      ///  $replyData = [];
         if ($text == '/start') {
             $replyData = [
                 'text'         => 'سلام خوش آمدید',
                 'reply_markup' => $keyboard
             ];
         } else if ($text == self::WEATHER) {
-//            if ($reply_text == self::CITYNAME) {
-//                $replyData = ['text' => 'weather is rainy 🌧'];
-//                return;
-//            } else {
-//                $replyData = ['text' => 'undefined command'];
-//                return;
-//            }
             $replyData = ['text' => self::CITYNAME];
+        } else if ($reply_text == self::CITYNAME) {
+            $replyData = ['text' => 'weather is rainy 🌧'];
+        } else {
+            $replyData = ['text' => 'undefined command'];
         }
 
         $response = Http:: post("https://api.telegram.org/bot{$botToken}/sendmessage",
