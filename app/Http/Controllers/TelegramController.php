@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Http;
 
 class TelegramController extends Controller
 {
+    const WEATHER = "پیش بینی وضع آب و هوا🌤";
+    const ABOUTUS = 'About Us';
+    const CONTACTUS = 'Contact Us';
+
     public function webhook(Request $request)
     {
         $tData = $request->all();
@@ -18,8 +22,8 @@ class TelegramController extends Controller
 
         $keyboard = json_encode([
             'keyboard'        => [
-                ["پیش بینی وضع آب و هوا🌤"],
-                ["aboutUs", "ContactUs"]
+                [self::WEATHER],
+                [self::ABOUTUS, self::CONTACTUS]
             ],
             'resize_keyboard' => true
         ]);
@@ -29,10 +33,10 @@ class TelegramController extends Controller
                     'text'         => 'سلام خوش آمدید',
                     'reply_markup' => $keyboard
                 ];
-
                 break;
-            case 'hi':
-                $replyData = ['text' => ' Hi How Are U :)'];
+
+            case self::WEATHER:
+                $replyData = ['text' => 'لطفا نام شهر مورد نظر را وارد نمایید...'];
                 break;
             default :
                 $replyData = ['text' => "Hi $firstName , Welcome To Instagram Robot ;0)"];
