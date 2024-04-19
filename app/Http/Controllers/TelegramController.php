@@ -22,8 +22,7 @@ class TelegramController extends Controller
                     'reply_markup' => [
                         'inline_keyboard' => [
                             [
-                                ['text' => 'option1'],
-                                ['text' => 'option2'],
+                                'text'=>'option1 '
                             ]
                         ]
                     ]
