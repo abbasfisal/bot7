@@ -15,19 +15,17 @@ class TelegramController extends Controller
         $firstName = $tData['message']['from']['first_name'];
         $botToken = env("TELEGRAM_API");
 
-        $replyMsg = null;
         switch ($text) {
             case 'hi':
-                $replyMsg = ' Hi How Are U :)';
+                $replyData = ['text' => ' Hi How Are U :)'];
                 break;
             default :
-                $replyMsg = "Hi $firstName , Welcome To Instagram Robot ;0)";
+                $replyData = ['text' => "Hi $firstName , Welcome To Instagram Robot ;0)"];
 
         }
         $response = Http:: post("https://api.telegram.org/bot{$botToken}/sendmessage",
             [
-                'chat_id' => $id,
-                'text'    => $replyMsg
+                array_merge(['chat_id' => $id], $replyData)
             ]);
 
         \Log::info('---- response ---- ', [$response->json()]);
