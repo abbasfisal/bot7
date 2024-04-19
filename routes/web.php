@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TelegramController;
+use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,4 +10,4 @@ Route::get('/', function () {
 });
 Route::get('/students', [StudentController::class, 'index']);
 
-Route::any('/telegram/webhook' , [TelegramController::class, 'webhook'])->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class]);
+Route::any('/telegram/webhook' , [TelegramController::class, 'webhook'])->withoutMiddleware([ValidateCsrfToken::class]);
