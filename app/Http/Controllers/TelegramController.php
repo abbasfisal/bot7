@@ -16,7 +16,7 @@ class TelegramController extends Controller
         $botToken = env("TELEGRAM_API");
 
         $keyboard = json_encode([
-            "inline_keyboard" => [
+            "keyboard" => [
                 [
                     [
                         "text" => "Yes",
