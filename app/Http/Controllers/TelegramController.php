@@ -19,8 +19,8 @@ class TelegramController extends Controller
             'keyboard'        => [
                 ["پیش بینی وضع آب و هوا🌤"],
                 ["aboutUs", "ContactUs"]
-            ],
-            'resize_keyboard' => true
+            ]
+
         ]);
         switch ($text) {
             case '/start' :
