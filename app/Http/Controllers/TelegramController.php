@@ -17,6 +17,7 @@ class TelegramController extends Controller
         \Log::info('----- t Data -----', [$tData]);
         $id = $tData['message']['chat']['id'];
         $text = $tData  ['message']['text'];
+        $reply_to_message = $tData['message']['reply_to_message'];
         $firstName = $tData['message']['from']['first_name'];
         $botToken = env("TELEGRAM_API");
 
@@ -37,6 +38,9 @@ class TelegramController extends Controller
 
             case self::WEATHER:
                 $replyData = ['text' => 'لطفا نام شهر مورد نظر را وارد نمایید...'];
+                break;
+            case $reply_to_message:
+                $replyData = ['text' => 'weather is go yoho'];
                 break;
             default :
                 $replyData = ['text' => "Hi $firstName , Welcome To Instagram Robot ;0)"];
