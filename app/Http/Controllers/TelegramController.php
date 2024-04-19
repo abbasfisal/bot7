@@ -23,7 +23,7 @@ class TelegramController extends Controller
             case '/start' :
                 $replyData = [
                     'text'         => 'سلام خوش آمدید',
-                    'reply_markup' => json_encode(['inline_keyboard' => $mainKeyboard])
+                    'reply_markup' => json_encode(['keyboard' => $mainKeyboard])
                 ];
 
                 break;
