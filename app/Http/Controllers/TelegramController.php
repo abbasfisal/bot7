@@ -10,6 +10,7 @@ class TelegramController extends Controller
     public function webhook(Request $request)
     {
         $tData = $request->all();
+        \Log::info('----- t Data -----', [$tData]);
         $id = $tData['message']['chat']['id'];
         $text = $tData  ['message']['text'];
         $firstName = $tData['message']['from']['first_name'];
