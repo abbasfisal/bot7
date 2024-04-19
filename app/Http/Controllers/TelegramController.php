@@ -14,11 +14,11 @@ class TelegramController extends Controller
     public function webhook(Request $request)
     {
         $tData = $request->all();
-        \Log::info('----- t Data -----', [$tData]);
-        $id = $tData['message']['chat']['id'];
-        $text = $tData  ['message']['text'];
-        $reply_to_message = isset($tData['message']['reply_to_message']) ? $tData['message']['reply_to_message'] : null;
-        $firstName = $tData['message']['from']['first_name'];
+        \Log::info('----- Telegram Data  -----', [$tData]);
+        $id = $tData['message']['chat']['id'] ?? null;
+        $text = $tData  ['message']['text'] ?? null;
+        $reply_to_message = $tData['message']['reply_to_message'] ?? null;
+        $firstName = $tData['message']['from']['first_name'] ?? null;
         $botToken = env("TELEGRAM_API");
 
         $keyboard = json_encode([
@@ -28,6 +28,7 @@ class TelegramController extends Controller
             ],
             'resize_keyboard' => true
         ]);
+
         switch ($text) {
             case '/start' :
                 $replyData = [
@@ -40,10 +41,10 @@ class TelegramController extends Controller
                 $replyData = ['text' => 'لطفا نام شهر مورد نظر را وارد نمایید...'];
                 break;
             case $reply_to_message:
-                $replyData = ['text' => 'weather is go yoho'];
+                $replyData = ['text' => 'weather is good yoho'];
                 break;
             default :
-                $replyData = ['text' => "Hi $firstName , Welcome To Instagram Robot ;0)"];
+                $replyData = ['text' => "Hi $firstName , Undefined Command ;0"];
 
         }
         $response = Http:: post("https://api.telegram.org/bot{$botToken}/sendmessage",
