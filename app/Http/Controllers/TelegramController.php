@@ -7,16 +7,27 @@ use Illuminate\Support\Facades\Http;
 
 class TelegramController extends Controller
 {
-    public function webhook(Request $r)
+    public function webhook(Request $request)
     {
-        $re = $r->all();
-        $id = $re['message']['chat']['id'];
-
+        $tData = $request->all();
+        $id = $tData['message']['chat']['id'];
+        $text = $tData  ['message']['text'];
+        $firstName = $tData['message']['from']['first_name'];
         $botToken = env("TELEGRAM_API");
+
+        $replyMsg = null;
+        switch ($text) {
+            case 'hi':
+                $replyMsg = ' Hi How Are U :)';
+                break;
+            default :
+                $replyMsg = "Hi $firstName , Welcome To Instagram Robot ;0)";
+
+        }
         $response = Http:: post("https://api.telegram.org/bot{$botToken}/sendmessage",
             [
                 'chat_id' => $id,
-                'text'    => 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.britannica.com%2Fscience%2Fflower&psig=AOvVaw2TnltX_R2w5o5PUDdq9rP9&ust=1713625184779000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPCE-rTFzoUDFQAAAAAdAAAAABAE'
+                'text'    => $replyMsg
             ]);
 
         \Log::info('---- response ---- ', [$response->json()]);
