@@ -16,8 +16,10 @@ class TelegramController extends Controller
         $botToken = env("TELEGRAM_API");
 
         $mainKeyboard = [
-            ['text'=>'پیش بینی وضع اب و هوا'] ,
-          //  ['aboutUs' , 'contactUs' , 'invite friends']
+            [
+                ['text' => 'پیش بینی وضع اب و هوا'],
+            ]
+            //  ['aboutUs' , 'contactUs' , 'invite friends']
         ];
         switch ($text) {
             case '/start' :
