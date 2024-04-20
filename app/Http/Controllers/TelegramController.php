@@ -33,8 +33,14 @@ class TelegramController extends Controller
             'resize_keyboard' => true
         ]);
 
-      ///  $replyData = [];
-        if ($text == '/start') {
+        ///  $replyData = [];
+        if ($text == self::CONTACTUS) {
+            $replyData = ['text' => 'My Email 📧 : aa@bb.cc'];
+
+        } else if ($text == self::ABOUTUS) {
+            $replyData = ['text' => 'First Instagram Bot ✅🤳'];
+
+        } else if ($text == '/start') {
             $replyData = [
                 'text'         => 'سلام خوش آمدید',
                 'reply_markup' => $keyboard
