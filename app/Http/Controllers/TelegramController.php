@@ -62,9 +62,9 @@ class TelegramController extends Controller
                 \Log::info('99999999999999999999 url 99999999999999', [$url, 'call_back_text', $callback_query['message']['text']]);
                 $result = Http::post($url)->json();
 
-                //$replyData = ['text'=>sprintf('Your City Is %s \n Weather Status : %s \n temp %s', $result['name'], $result['weather'][0]['description'], $result['main']['temp'])];
-            $replyData=['text'=>'hi'];
-                \Log::info('========= RESULT =======', [$result  , 'replydata'=>$replyData]);
+                $replyData = ['text' => sprintf('Your City Is %s \n Weather Status : %s \n temp %s', $result['name'], $result['weather'][0]['description'], $result['main']['temp'])];
+
+                \Log::info('========= RESULT =======', [$result, 'replydata' => $replyData]);
             }
         } else if ($text == self::CONTACTUS) {
             $replyData = ['text' => 'My Email 📧 : aa@bb.cc'];
