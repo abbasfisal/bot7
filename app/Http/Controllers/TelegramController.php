@@ -64,7 +64,7 @@ class TelegramController extends Controller
 
                 $replyData = ['text'=>sprintf('Your City Is %s \n Weather Status : %s \n temp %s', $result['name'], $result['weather'][0]['description'], $result['main']['temp'])];
 
-                \Log::info('========= RESULT =======', [$result]);
+                \Log::info('========= RESULT =======', [$result  , 'replydata'=>$replyData]);
             }
         } else if ($text == self::CONTACTUS) {
             $replyData = ['text' => 'My Email 📧 : aa@bb.cc'];
