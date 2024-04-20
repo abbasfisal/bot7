@@ -25,7 +25,7 @@ class TelegramController extends Controller
         //callback query
         $callback_query = $tData['callback_query'] ?? null;
         $callback_chat_id = $callback_query['message']['chat']['id'] ?? null;
-        $callback_data = $callback_query['data']??null;
+        $callback_data = $callback_query['data'] ?? null;
 
         \Log::info('\n--------REPLYMESSAGE-----', [$reply_to_message]);
         echo '\n';
@@ -43,7 +43,16 @@ class TelegramController extends Controller
         ]);
 
         ///  $replyData = [];
-        if ($text == self::CONTACTUS) {
+        if ($callback_query) {
+            \Log::info('*** inside call back query ***', []);
+
+            $weatherToken = env('weather_token');
+            if ($callback_data == 'today') {
+                $url = "https://api.openweathermap.org/data/2.5/weather?q=$text&appid=$weatherToken&units=metric&lang=fa";
+                $result = Http::post($url);
+                \Log::info('========= RESULT =======', [$result]);
+            }
+        } else if ($text == self::CONTACTUS) {
             $replyData = ['text' => 'My Email 📧 : aa@bb.cc'];
 
         } else if ($text == self::ABOUTUS) {
@@ -65,16 +74,7 @@ class TelegramController extends Controller
                 $replyData = ['text' => 'City Not Found :o'];
             } else {
                 \Log::info('*** city found ***', []);
-                if ($callback_query) {
-                    \Log::info('*** inside call back query ***', []);
 
-                    $weatherToken = env('weather_token');
-                    if ($callback_data == 'today') {
-                        $url = "https://api.openweathermap.org/data/2.5/weather?q=$text&appid=$weatherToken&units=metric&lang=fa";
-                        $result = Http::post($url);
-                        \Log::info('========= RESULT =======', [$result]);
-                    }
-                }
 
                 \Log::info('\n---- city name ----- ', [$text]);
 
