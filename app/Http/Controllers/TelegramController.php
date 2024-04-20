@@ -48,7 +48,7 @@ class TelegramController extends Controller
 
             $weatherToken = env('WEATHER_TOKEN');
             if ($callback_data == 'today') {
-                $url = "https://api.openweathermap.org/data/2.5/weather?q=$text&appid=$weatherToken&units=metric&lang=fa";
+                $url = "https://api.openweathermap.org/data/2.5/weather?q=Tehran&appid=$weatherToken&units=metric&lang=fa";
                 \Log::info('99999999999999999999 url 99999999999999' , [$url]);
                 $result = Http::post($url);
                 \Log::info('========= RESULT =======', [$result->json()]);
