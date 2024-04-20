@@ -65,8 +65,10 @@ class TelegramController extends Controller
                         ['text' => 'شانزده روز آینده', 'callback_data' => '16day'],
                     ]
                 ];
-                $replyData = ['text'         => 'weather is rainy 🌧',
-                              'reply_markup' => json_encode(['inline_keyboard' => $inlineKeyboard])];
+                $replyData = [
+                    'text'         => 'بازی زمانی مورد نظر را انتخاب نمایید🌓',
+                    'reply_markup' => json_encode(['inline_keyboard' => $inlineKeyboard])
+                ];
             }
         } else {
             $replyData = ['text' => 'undefined command'];
