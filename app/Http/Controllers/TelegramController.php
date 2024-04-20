@@ -22,7 +22,12 @@ class TelegramController extends Controller
         $reply_to_message = $tData['message']['reply_to_message'] ?? null;
         $reply_text = $reply_to_message['text'] ?? null;
 
-        \Log::info('--------REPLYMESSAGE-----', [$reply_to_message]);
+        //callback query
+        $callback_query = $tData['callback_query'] ?? null;
+        $callback_chat_id = $callback_query['chat']['id'] ?? null;
+
+        \Log::info('\n--------REPLYMESSAGE-----', [$reply_to_message]);
+        \Log::info('\n--------call back query-----', ['callback data' => $callback_query, 'callback chat id ' => $callback_chat_id]);
         $firstName = $tData['message']['from']['first_name'] ?? null;
         $botToken = env("TELEGRAM_API");
 
