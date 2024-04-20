@@ -17,7 +17,7 @@ class TelegramController extends Controller
     {
         $tData = $request->all();
         \Log::info('----- Telegram Data  -----', [$tData]);
-        $id = $tData['message']['chat']['id'] ?? null;
+        $id = $tData['message']['chat']['id'] ?? $tData['callback_query']['message']['chat']['id'];
         $text = $tData  ['message']['text'] ?? null;
         $reply_to_message = $tData['message']['reply_to_message'] ?? null;
         $reply_text = $reply_to_message['text'] ?? null;
