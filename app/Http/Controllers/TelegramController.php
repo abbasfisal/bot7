@@ -46,9 +46,10 @@ class TelegramController extends Controller
         if ($callback_query) {
             \Log::info('*** inside call back query ***', []);
 
-            $weatherToken = env('weather_token');
+            $weatherToken = env('WEATHER_TOKEN');
             if ($callback_data == 'today') {
                 $url = "https://api.openweathermap.org/data/2.5/weather?q=$text&appid=$weatherToken&units=metric&lang=fa";
+                \Log::info('99999999999999999999 url 99999999999999' , [$url]);
                 $result = Http::post($url);
                 \Log::info('========= RESULT =======', [$result]);
             }
