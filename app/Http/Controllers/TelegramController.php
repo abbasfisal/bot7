@@ -49,12 +49,17 @@ class TelegramController extends Controller
             $weatherToken = env('WEATHER_TOKEN');
             if ($callback_data == 'today') {
 
-                $first = "Your City Is ";
-               // $txt = explode($first, $callback_query['message']['text']);
+                $text = $callback_query['message']['text'];
+                $first = 'Your City Is ';
+
+                $text = explode($first, $text);
+                $second = ' , Select Weather Period ....';
+                $text = explode($second, $text[1]);
+                $cityName = $text[0];
 
 
-                $url = "https://api.openweathermap.org/data/2.5/weather?q=Tehran&appid=$weatherToken&units=metric&lang=fa";
-                \Log::info('99999999999999999999 url 99999999999999', [$url , 'call_back_text' , $callback_query['message']['text']]);
+                $url = "https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=$weatherToken&units=metric&lang=fa";
+                \Log::info('99999999999999999999 url 99999999999999', [$url, 'call_back_text', $callback_query['message']['text']]);
                 $result = Http::post($url);
                 \Log::info('========= RESULT =======', [$result->json()]);
             }
@@ -91,7 +96,7 @@ class TelegramController extends Controller
                         ['text' => 'شانزده روز آینده', 'callback_data' => '16day'],
                     ]
                 ];
-                $description = sprintf("Your City Is %s \n  , \n Select Weather Period ....", $text);
+                $description = sprintf("Your City Is %s , Select Weather Period ....", $text);
                 $replyData = [
                     'text'         => $description,
                     'reply_markup' => json_encode(['inline_keyboard' => $inlineKeyboard])
