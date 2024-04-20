@@ -48,6 +48,10 @@ class TelegramController extends Controller
         } else if ($text == self::WEATHER) {
             $replyData = ['text' => self::CITYNAME];
         } else if ($reply_text == self::CITYNAME) {
+
+            //check city exist in db
+            \Log::info('\n---- city name ----- ', [$text]);
+
             $replyData = ['text' => 'weather is rainy 🌧'];
         } else {
             $replyData = ['text' => 'undefined command'];

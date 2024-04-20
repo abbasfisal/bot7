@@ -7,6 +7,8 @@ use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Laravel\Prompts\Table;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,12 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        DB::table('users')->delete();
+        DB::table('students')->delete();
 
-        User::factory()->create([
-            'name'  => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::factory(10)->create();
         Student::factory(200)->create();
+        $this->call(CitySeeder::class);
     }
 }
