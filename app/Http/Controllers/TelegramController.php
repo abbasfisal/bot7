@@ -25,7 +25,7 @@ class TelegramController extends Controller
         //callback query
         $callback_query = $tData['callback_query'] ?? null;
         $callback_chat_id = $callback_query['message']['chat']['id'] ?? null;
-        $callback_data = $callback_query['data'];
+        $callback_data = $callback_query['data']??null;
 
         \Log::info('\n--------REPLYMESSAGE-----', [$reply_to_message]);
         echo '\n';
