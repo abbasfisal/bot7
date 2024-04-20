@@ -60,7 +60,10 @@ class TelegramController extends Controller
 
                 $url = "https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=$weatherToken&units=metric&lang=fa";
                 \Log::info('99999999999999999999 url 99999999999999', [$url, 'call_back_text', $callback_query['message']['text']]);
-                $result = Http::post($url);
+                $result = Http::post($url)->json();
+
+                $replyData = sprintf('Your City Is %s \n Weather Status : %s \n temp %s', $result['name'], $result['weather']['description'], $result['main']['temp'])
+
                 \Log::info('========= RESULT =======', [$result->json()]);
             }
         } else if ($text == self::CONTACTUS) {
