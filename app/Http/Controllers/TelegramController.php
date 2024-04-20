@@ -64,9 +64,9 @@ class TelegramController extends Controller
                 //city not found
                 $replyData = ['text' => 'City Not Found :o'];
             } else {
-                \Log::inf('*** city found ***', []);
+                \Log::info('*** city found ***', []);
                 if ($callback_query) {
-                    \Log::inf('*** inside call back query ***', []);
+                    \Log::info('*** inside call back query ***', []);
 
                     $weatherToken = env('weather_token');
                     if ($callback_data == 'today') {
