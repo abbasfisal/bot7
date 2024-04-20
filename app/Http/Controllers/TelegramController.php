@@ -42,7 +42,7 @@ class TelegramController extends Controller
             'resize_keyboard' => true
         ]);
 
-        ///  $replyData = [];
+          $replyData = [];
         if ($callback_query) {
             \Log::info('*** inside call back query ***', []);
 
@@ -51,7 +51,7 @@ class TelegramController extends Controller
                 $url = "https://api.openweathermap.org/data/2.5/weather?q=$text&appid=$weatherToken&units=metric&lang=fa";
                 \Log::info('99999999999999999999 url 99999999999999' , [$url]);
                 $result = Http::post($url);
-                \Log::info('========= RESULT =======', [$result]);
+                \Log::info('========= RESULT =======', [$result->json()]);
             }
         } else if ($text == self::CONTACTUS) {
             $replyData = ['text' => 'My Email 📧 : aa@bb.cc'];
