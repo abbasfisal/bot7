@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -50,9 +51,23 @@ class TelegramController extends Controller
         } else if ($reply_text == self::CITYNAME) {
 
             //check city exist in db
-            \Log::info('\n---- city name ----- ', [$text]);
+            $city = City::query()->where('name', $text)->get();
+            if ($city->count() == 0) {
+                //city not found
+                $replyData = ['text' => 'City Not Found :o'];
+            } else {
+                \Log::info('\n---- city name ----- ', [$text]);
 
-            $replyData = ['text' => 'weather is rainy 🌧'];
+                $inlineKeyboard = [
+                    [
+                        ['text' => 'امروز', 'callback_data' => 'today'],
+                        ['text' => 'چهار روز آینده', 'callback_data' => '4day'],
+                        ['text' => 'شانزده روز آینده', 'callback_data' => '16day'],
+                    ]
+                ];
+                $replyData = ['text'         => 'weather is rainy 🌧',
+                              'reply_markup' => json_encode(['inline_keyboard' => $inlineKeyboard])];
+            }
         } else {
             $replyData = ['text' => 'undefined command'];
         }
