@@ -63,11 +63,11 @@ class TelegramController extends Controller
                 $result = Http::post($url)->json();
 
                 $replyData = ['text' =>
-                                  sprintf('Your City Is : %s' .
+                                  sprintf('🌏 Your City Is : %s' .
                                       "\n" .
-                                      'Weather Status : %s ' .
+                                      '🏖 Weather Status : %s ' .
                                       "\n" .
-                                      'temp :%s', $result['name'], $result['weather'][0]['description'], $result['main']['temp'])];
+                                      '🌡 temp :%s', $result['name'], $result['weather'][0]['description'], $result['main']['temp'])];
 
                 \Log::info('========= RESULT =======', [$result, 'replydata' => $replyData]);
             }
