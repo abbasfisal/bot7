@@ -42,14 +42,14 @@ class TelegramController extends Controller
             'resize_keyboard' => true
         ]);
 
-          $replyData = [];
+        $replyData = [];
         if ($callback_query) {
             \Log::info('*** inside call back query ***', []);
 
             $weatherToken = env('WEATHER_TOKEN');
             if ($callback_data == 'today') {
                 $url = "https://api.openweathermap.org/data/2.5/weather?q=Tehran&appid=$weatherToken&units=metric&lang=fa";
-                \Log::info('99999999999999999999 url 99999999999999' , [$url]);
+                \Log::info('99999999999999999999 url 99999999999999', [$url]);
                 $result = Http::post($url);
                 \Log::info('========= RESULT =======', [$result->json()]);
             }
@@ -86,8 +86,9 @@ class TelegramController extends Controller
                         ['text' => 'شانزده روز آینده', 'callback_data' => '16day'],
                     ]
                 ];
+                $description = sprintf("Your City Is %s \n  , \n Select Weather Period ....", $text);
                 $replyData = [
-                    'text'         => 'بازی زمانی مورد نظر را انتخاب نمایید🌓',
+                    'text'         => $description ,
                     'reply_markup' => json_encode(['inline_keyboard' => $inlineKeyboard])
                 ];
             }
