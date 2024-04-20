@@ -15,7 +15,7 @@ class CitySeeder extends Seeder
     public function run(): void
     {
         DB::table('cities')->delete();
-        $cities = ['tehran', 'qom', 'shiraz'];
+        $cities = ['Tehran', 'Qom', 'Shiraz'];
         foreach ($cities as $city) {
             City::query()->create(['name' => $city]);
         }
