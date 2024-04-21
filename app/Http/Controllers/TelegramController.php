@@ -47,6 +47,9 @@ class TelegramController extends Controller
             if ($data == 'update') {
                 $this->editMessage($chatId, $messageId, 'updated ', $inlineKeyboard);
             }
+            if ($data == 'delete') {
+                $this->deleteMessage($chatId, $messageId);
+            }
         }
         //----
         if (isset($message)) {
@@ -117,11 +120,18 @@ class TelegramController extends Controller
         ]);
     }
 
+    public function deleteMessage($chatId, $messageId)
+    {
+        $this->callBot('deleteMessage', [
+            'chat_id'    => $chatId,
+            'message_id' => $messageId,
+        ]);
+    }
+
     public function logs()
     {
         $path = base_path() . "/storage/logs/laravel.log";
         $file = File::get($path);
-
         return ($file);
     }
 
