@@ -23,6 +23,7 @@ class TelegramController extends Controller
         $messageId = $tData['message']['message_id'] ?? $tData['callback_query']['message']['message_id'];
         $chatId = $tData['message']['chat'] ['id'] ?? $tData['callback_query']['message']['chat']['id'];
 
+        Log::info('--- data --', ['message' => $message, 'message ID ' => $messageId, 'chatID' => $chatId]);
 
         //-- keyboard
         $keyboard = $this->keyboard('button one');
