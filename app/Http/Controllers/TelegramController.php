@@ -19,32 +19,10 @@ class TelegramController extends Controller
         $tData = $request->all();
         Log::info('---- telegram incoming data ----', [$tData]);
 
-        $message = $tData['message']['text'];
+        $message = $tData['message']['text'] ?? '-';
         $chatId = $tData['message']['chat'] ['id'];
 
-        $kyboard = json_encode([
-            'keyboard' => [
-                ['button one ', 'button 2'],
-                ['button 3']
-            ]
-        ]);
-
-        $this->sendMessage($chatId, 'salammmmm man button hastam', $kyboard);
-
-        $step1 = $this->key('salam', 'hiCallback');
-        $step2 = $this->inlineKeyboard($step1);
-
-        $inlinekeyboard = json_encode([
-            'inline_keyboard' => [
-                [
-
-                    ['text' => 'option 1', 'callback_data' => 'callbackOne'],
-                    ['text' => 'option 2', 'callback_data' => 'callbackTow'],
-                ]
-            ]
-        ]);
-
-        $this->sendMessage($chatId, 'welcome to your bot ;)', $inlinekeyboard);
+        $this->sendMessage($chatId, 'welcome to your bot ;)');
 
     }
 
