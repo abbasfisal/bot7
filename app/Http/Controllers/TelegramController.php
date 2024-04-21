@@ -35,7 +35,7 @@ class TelegramController extends Controller
         $this->callBot('sendMessage', [
             'chat_id'        => $chatId,
             'text'           => $text,
-            'reply_keyboard' => $keyboard
+            'reply_markup' => $keyboard
         ]);
     }
 
