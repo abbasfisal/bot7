@@ -30,11 +30,11 @@ class TelegramController extends Controller
         }
     }
 
-    public function sendMessage($chatId, $text, $keyboard = null)
+    public function sendMessage($chatId, $text, $keyboard = '')
     {
         $this->callBot('sendMessage', [
-            'chat_id'        => $chatId,
-            'text'           => $text,
+            'chat_id'      => $chatId,
+            'text'         => $text,
             'reply_markup' => $keyboard
         ]);
     }
@@ -42,7 +42,6 @@ class TelegramController extends Controller
     public function callBot(string $methodName, array $data)
     {
         $response = Http::post($this->url . $methodName, $data);
-
         Log::info('--- response ----', [$response->json()]);
     }
 
