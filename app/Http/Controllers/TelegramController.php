@@ -25,7 +25,7 @@ class TelegramController extends Controller
             $messageId = $tData['callback_query']['message']['message_id'];
             $chatId = $tData['callback_query']['message']['chat']['id'];
         } else {
-            $message = $tData['message']['text'];
+            $message = $tData['message']['text'] ?? ' ';
             $messageId = $tData['message']['message_id'];
             $chatId = $tData['message']['chat'] ['id'];
         }
@@ -34,6 +34,7 @@ class TelegramController extends Controller
         //-- keyboard
         $keyboard = $this->keyboard('button one');
         //----
+        $this->sendMessage('keyboard message', $keyboard);
 
         //--- inline keyboard
         $inlineButton = [
@@ -41,7 +42,6 @@ class TelegramController extends Controller
             $this->inlineButton('delete me', 'delete'),
         ];
         $inlineKeyboard = $this->inlineKeyboard($inlineButton);
-
 
         if (isset($data)) {
             if ($data == 'update') {
