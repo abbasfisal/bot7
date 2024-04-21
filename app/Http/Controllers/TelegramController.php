@@ -49,7 +49,7 @@ class TelegramController extends Controller
     {
         $btn = [
             [
-                'text' => $text
+                $text
             ]
         ];
 
