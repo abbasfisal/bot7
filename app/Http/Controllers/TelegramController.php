@@ -34,7 +34,7 @@ class TelegramController extends Controller
         //-- keyboard
         $keyboard = $this->keyboard('button one');
         //----
-        $this->sendMessage('keyboard message', $keyboard);
+        $this->sendMessage($chatId, $keyboard);
 
         //--- inline keyboard
         $inlineButton = [
