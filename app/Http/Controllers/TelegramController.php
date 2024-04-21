@@ -18,7 +18,7 @@ class TelegramController extends Controller
     public function webhook(Request $request)
     {
         $tData = $request->all();
-        Log::info('---- telegram incoming data ----', [$tData]);
+        Log::info("\n ---- telegram incoming data ---- \n", [$tData]);
 
         if (isset($tData['callback_query'])) {
             $data = $tData['callback_query']['data'];
