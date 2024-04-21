@@ -19,7 +19,7 @@ class TelegramController extends Controller
         $tData = $request->all();
         Log::info('---- telegram incoming data ----', [$tData]);
 
-        $message = $tData['message']['text'];
+        $message = $tData['message']['text'] ?? $tData['callback_query']['message']['text'];
         $messageId = $tData['message']['message_id'] ?? $tData['callback_query']['message']['message_id'];
         $chatId = $tData['message']['chat'] ['id'] ?? $tData['callback_query']['message']['chat']['id'];
 
