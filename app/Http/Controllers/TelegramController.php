@@ -110,9 +110,10 @@ class TelegramController extends Controller
     public function editMessage($chatId, $messageId, $text, $reply_markup)
     {
         $this->callBot('editMessageText', [
-            'chat_id'    => $chatId,
-            'message_id' => $messageId,
-            'text'       => $text
+            'chat_id'      => $chatId,
+            'message_id'   => $messageId,
+            'text'         => $text,
+            'reply_markup' => $reply_markup
         ]);
     }
 
