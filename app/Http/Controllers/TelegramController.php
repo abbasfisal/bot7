@@ -73,7 +73,7 @@ class TelegramController extends Controller
         return json_encode([
             'inline_keyboard' => [
                 [
-                    ['option A', 'callbackA']
+                    ['text' => 'option A', 'callback_data' => 'callbackA']
                 ]
             ]
         ]);
