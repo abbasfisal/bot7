@@ -23,9 +23,7 @@ class TelegramController extends Controller
         $chatId = $tData['message']['chat'] ['id'];
 
 
-        $step1 = [
-            $this->key('salam', 'hiCallback')
-        ];
+        $step1 = $this->key('salam', 'hiCallback');
         $step2 = $this->inlineKeyboard($step1);
 
         $this->sendMessage($chatId, 'welcome to your bot ;)', $step2);
