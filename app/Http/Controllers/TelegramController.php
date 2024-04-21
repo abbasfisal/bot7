@@ -15,7 +15,7 @@ class TelegramController extends Controller
 
     public function webhook(Request $request)
     {
-        $tData = $request->json();
+        $tData = $request->all();
         Log::info('-- telegram data --- ', [$tData]);
     }
 
