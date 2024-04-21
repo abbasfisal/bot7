@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class TelegramController extends Controller
 {
-    public function __construct(public ?string $token, public ?string $url)
+    public function __construct(public string $token = '', public string $url = '')
     {
         $this->token = env('TELEGRAM_API');
         $this->url = "https://api.telegram.org/bot$this->token/";
