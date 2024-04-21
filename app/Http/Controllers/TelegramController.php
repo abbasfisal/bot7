@@ -27,7 +27,8 @@ class TelegramController extends Controller
         $keyboard = $this->keyboard('button one');
         //----
         //--- inline keyboard
-        $inlineKeyboard = $this->inlineKeyboard();
+        $inlineButton = [$this->inlineButton('option 1', 'callbackOne')];
+        $inlineKeyboard = $this->inlineKeyboard($inlineButton);
         //----
         $this->sendMessage($chatId, 'welcome to your bot ;)', $inlineKeyboard);
 
@@ -68,14 +69,18 @@ class TelegramController extends Controller
     }
 
 
-    public function inlineKeyboard()
+    public function inlineButton($buttonText, $callBackData): array
+    {
+        return [
+            'text'          => $buttonText,
+            'callback_data' => $callBackData
+        ];
+    }
+
+    public function inlineKeyboard(array $inlineButton)
     {
         return json_encode([
-            'inline_keyboard' => [
-                [
-                    ['text' => 'option A', 'callback_data' => 'callbackA']
-                ]
-            ]
+            'inline_keyboard' => $inlineButton
         ]);
     }
 
