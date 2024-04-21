@@ -23,7 +23,6 @@ class TelegramController extends Controller
         $messageId = $tData['message']['message_id'] ?? $tData['callback_query']['message']['message_id'];
         $chatId = $tData['message']['chat'] ['id'] ?? $tData['callback_query']['message']['chat']['id'];
 
-        $this->editMessage($chatId, $messageId, 'updated', '');
 
         //-- keyboard
         $keyboard = $this->keyboard('button one');
@@ -34,6 +33,9 @@ class TelegramController extends Controller
             $this->inlineButton('option 2', 'callback'),
         ];
         $inlineKeyboard = $this->inlineKeyboard($inlineButton);
+
+        $this->editMessage($chatId, $messageId, 'updated', $inlineKeyboard);
+
         //----
         $this->sendMessage($chatId, 'welcome to your bot ;)', $inlineKeyboard);
 
