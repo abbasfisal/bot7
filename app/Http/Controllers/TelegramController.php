@@ -29,7 +29,7 @@ class TelegramController extends Controller
             ]
         ]);
 
-        $this->sendMessage($chatId, '', $kyboard);
+        $this->sendMessage($chatId, 'salammmmm man button hastam', $kyboard);
 
         $step1 = $this->key('salam', 'hiCallback');
         $step2 = $this->inlineKeyboard($step1);
