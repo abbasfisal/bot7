@@ -20,26 +20,40 @@ class TelegramController extends Controller
         $tData = $request->all();
         Log::info('---- telegram incoming data ----', [$tData]);
 
-        $message = $tData['message']['text'] ?? $tData['callback_query']['message']['text'];
-        $messageId = $tData['message']['message_id'] ?? $tData['callback_query']['message']['message_id'];
-        $chatId = $tData['message']['chat'] ['id'] ?? $tData['callback_query']['message']['chat']['id'];
+        if (isset($tData['callback_query'])) {
+            $data = $tData['callback_query']['data'];
+            $messageId = $tData['callback_query']['message']['message_id'];
+            $chatId = $tData['callback_query']['message']['chat']['id'];
+        } else {
+            $message = $tData['message']['text'];
+            $messageId = $tData['message']['message_id'];
+            $chatId = $tData['message']['chat'] ['id'];
+        }
 
-        Log::info('--- data --', ['message' => $message, 'message ID ' => $messageId, 'chatID' => $chatId]);
 
         //-- keyboard
         $keyboard = $this->keyboard('button one');
         //----
+
         //--- inline keyboard
         $inlineButton = [
-            $this->inlineButton('option 1', 'callback'),
-            $this->inlineButton('option 2', 'callback'),
+            $this->inlineButton('update me', 'update'),
+            $this->inlineButton('delete me', 'delete'),
         ];
         $inlineKeyboard = $this->inlineKeyboard($inlineButton);
 
-        $this->editMessage($chatId, $messageId, 'updated', $inlineKeyboard);
 
+        if (isset($data)) {
+            if ($data == 'update') {
+                $this->editMessage($chatId, $messageId, 'updated ', $inlineKeyboard);
+            }
+        }
         //----
-        $this->sendMessage($chatId, 'welcome to your bot ;)', $inlineKeyboard);
+        if (isset($message)) {
+            if ($message == '/start') {
+                $this->sendMessage($chatId, 'welcome to your bot ;)', $inlineKeyboard);
+            }
+        }
 
     }
 
@@ -107,7 +121,7 @@ class TelegramController extends Controller
         $path = base_path() . "/storage/logs/laravel.log";
         $file = File::get($path);
 
-        return json_decode($file);
+        return ($file);
     }
 
 }
