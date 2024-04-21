@@ -80,7 +80,7 @@ class TelegramController extends Controller
     public function inlineKeyboard(array $inlineButton)
     {
         return json_encode([
-            'inline_keyboard' => $inlineButton
+            'inline_keyboard' =>[ $inlineButton]
         ]);
     }
 
