@@ -22,7 +22,11 @@ class TelegramController extends Controller
         $message = $tData['message']['text'] ?? '-';
         $chatId = $tData['message']['chat'] ['id'];
 
-        $this->sendMessage($chatId, 'welcome to your bot ;)');
+
+        //-- keyboard
+        $keyboard = $this->keyboard('button one');
+        //----
+        $this->sendMessage($chatId, 'welcome to your bot ;)', $keyboard);
 
     }
 
