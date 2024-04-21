@@ -26,12 +26,15 @@ class TelegramController extends Controller
         $step1 = $this->key('salam', 'hiCallback');
         $step2 = $this->inlineKeyboard($step1);
 
-        $this->sendMessage($chatId, 'welcome to your bot ;)', $step2);
+        $inlinekeyboard = json_encode([
+            'inline_keyboard'=>[
+                ['text'=>'option 1' , 'callback_data'=> 'callbackOne'],
+                ['text'=>'option 2' , 'callback_data'=> 'callbackTow'],
+            ]
+        ]);
 
-//        if ($message == 'key') {
-//            $key = $this->keyboard('button 1');
-//            $this->sendMessage($chatId, 'please select ', $key);
-//        }
+        $this->sendMessage($chatId, 'welcome to your bot ;)',$inlinekeyboard );
+
     }
 
     public function sendMessage($chatId, $text, $keyboard = '')
