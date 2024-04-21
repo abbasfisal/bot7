@@ -102,12 +102,12 @@ class TelegramController extends Controller
         ]);
     }
 
-    public function logs(): array
+    public function logs()
     {
         $path = base_path() . "/storage/logs/laravel.log";
         $file = File::get($path);
 
-        return ['data' => $file];
+        return json_encode($file);
     }
 
 }
