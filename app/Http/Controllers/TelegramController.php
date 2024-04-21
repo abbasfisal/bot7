@@ -22,8 +22,8 @@ class TelegramController extends Controller
         $message = $tData['message']['text'];
         $chatId = $tData['message']['chat'] ['id'];
 
-        $inlineKeyboard = $this->keyboard('button 1');
-
+        $inlineBtn = $this->keyboard('button 1');
+        $inlineKeyboard  = $this->inlineKeyboard($inlineBtn);
         $this->sendMessage($chatId, 'welcome to your bot ;)', $inlineKeyboard);
 
         if ($message == 'key') {
