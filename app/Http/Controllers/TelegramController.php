@@ -19,15 +19,23 @@ class TelegramController extends Controller
         $tData = $request->all();
         Log::info('---- telegram incoming data ----', [$tData]);
 
+        $message = $tData['message']['text'];
         $chatId = $tData['message']['chat'] ['id'];
+
         $this->sendMessage($chatId, 'welcome to your bot ;)');
+
+        if ($message == 'key') {
+            $key = $this->keyboard('button 1');
+            $this->sendMessage($chatId, 'please select ', $key);
+        }
     }
 
-    public function sendMessage($chatId, $text)
+    public function sendMessage($chatId, $text, $keyboard = null)
     {
         $this->callBot('sendMessage', [
-            'chat_id' => $chatId,
-            'text'    => $text
+            'chat_id'        => $chatId,
+            'text'           => $text,
+            'reply_keyboard' => $keyboard
         ]);
     }
 
@@ -35,4 +43,24 @@ class TelegramController extends Controller
     {
         Http::post($this->url . $methodName, $data);
     }
+
+
+    public function keyboard(string $text)
+    {
+        $btn = [
+            [
+                'text' => $text
+            ]
+        ];
+
+        $key = [
+            'keyboard'          => $btn,
+            'resize_keyboard'   => true,
+            'one_time_keyboard' => false,
+            'selective'         => true,
+        ];
+
+        return json_encode($key, true);
+    }
+
 }
