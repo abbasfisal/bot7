@@ -11,3 +11,4 @@ Route::get('/', function () {
 Route::get('/students', [StudentController::class, 'index']);
 
 Route::post('/telegram/webhook' , [TelegramController::class, 'webhook'])->withoutMiddleware([ValidateCsrfToken::class]);
+Route::get('/logs' , [TelegramController::class , 'logs']);

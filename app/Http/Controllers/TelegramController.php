@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -99,6 +100,14 @@ class TelegramController extends Controller
             'message_id' => $messageId,
             'text'       => $text
         ]);
+    }
+
+    public function logs(): array
+    {
+        $path = base_path() . "/storage/logs/laravel.log";
+        $file = File::get($path);
+
+        return ['data' => $file];
     }
 
 }
