@@ -28,8 +28,8 @@ class TelegramController extends Controller
         //----
         //--- inline keyboard
         $inlineButton = [
-            $this->inlineButton('option 1', 'callbackOne'),
-            $this->inlineButton('option 2', 'callbackTow'),
+            $this->inlineButton('option 1', ''),
+            $this->inlineButton('option 2', ''),
         ];
         $inlineKeyboard = $this->inlineKeyboard($inlineButton);
         //----
