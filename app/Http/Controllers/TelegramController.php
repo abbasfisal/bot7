@@ -22,6 +22,14 @@ class TelegramController extends Controller
         $message = $tData['message']['text'];
         $chatId = $tData['message']['chat'] ['id'];
 
+        $kyboard = json_encode([
+            'keyboard' => [
+                ['button one ', 'button 2'],
+                ['button 3']
+            ]
+        ]);
+
+        $this->sendMessage($chatId, '', $kyboard);
 
         $step1 = $this->key('salam', 'hiCallback');
         $step2 = $this->inlineKeyboard($step1);
