@@ -17,7 +17,7 @@ class TelegramController extends Controller
     public function webhook(Request $request)
     {
         $tData = $request->all();
-        Log::info('---- telegram incoming data ----', [$tData]);
+        Log::info('\n---- telegram incoming data ----\n', [$tData, '\n---- end ----\n']);
 
         $message = $tData['message']['text'];
         $chatId = $tData['message']['chat'] ['id'];
@@ -42,7 +42,7 @@ class TelegramController extends Controller
     public function callBot(string $methodName, array $data)
     {
         $response = Http::post($this->url . $methodName, $data);
-        Log::info('--- response ----', [$response->json()]);
+        Log::info('\n---- telegram incoming data ----\n', [$response->json(), '\n---- end ----\n']);
     }
 
 
