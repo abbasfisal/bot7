@@ -25,9 +25,14 @@ class TelegramController extends Controller
 
     public function sendMessage($chatId, $text)
     {
-        Http::post($this->url . 'sendMessage', [
+        $this->callBot('sendMessage', [
             'chat_id' => $chatId,
             'text'    => $text
         ]);
+    }
+
+    public function callBot(string $methodName, array $data)
+    {
+        Http::post($this->url . $methodName, $data);
     }
 }
