@@ -19,9 +19,11 @@ class TelegramController extends Controller
         $tData = $request->all();
         Log::info('---- telegram incoming data ----', [$tData]);
 
-        $message = $tData['message']['text'] ?? '-';
-        $chatId = $tData['message']['chat'] ['id'];
+        $message = $tData['message']['text'];
+        $messageId = $tData['message']['message_id'] ?? $tData['callback_query']['message']['message_id'];
+        $chatId = $tData['message']['chat'] ['id'] ?? $tData['callback_query']['message']['chat']['id'];
 
+        $this->editMessage($chatId, $messageId, 'updated', '');
 
         //-- keyboard
         $keyboard = $this->keyboard('button one');
@@ -49,7 +51,7 @@ class TelegramController extends Controller
     public function callBot(string $methodName, array $data)
     {
         $response = Http::post($this->url . $methodName, $data);
-        Log::info('--- response ----', [$response->json()]);
+        Log::info(" --- response $methodName ----", [$response->json()]);
     }
 
 
@@ -84,6 +86,14 @@ class TelegramController extends Controller
     {
         return json_encode([
             'inline_keyboard' => [$inlineButton]
+        ]);
+    }
+
+    public function editMessage($chatId, $messageId, $text, $reply_markup)
+    {
+        $this->callBot('editMessageText', [
+            'chat_id'    => $chatId,
+            'message_id' => $messageId
         ]);
     }
 
