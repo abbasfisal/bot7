@@ -173,6 +173,7 @@ class TelegramController extends Controller
     public function arz($field)
     {
         $response = Http::get('https://www.megaweb.ir/api/money')->json();
+        Log::info('\n\n \t\t ---- arz response ----- \n' , [$response]);
         if ($field == 'usd') {
             return $response['sell_usd'];
         }
