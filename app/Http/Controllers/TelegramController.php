@@ -20,6 +20,10 @@ class TelegramController extends Controller
         $tData = $request->all();
         Log::info("\n \t\t---- telegram incoming data ---- \n", [$tData]);
 
+        if (isset($tData['my_chat_member'])) {
+            return;
+        }
+
         if (isset($tData['callback_query'])) {
             $data = $tData['callback_query']['data'];
             $messageId = $tData['callback_query']['message']['message_id'];
@@ -34,7 +38,7 @@ class TelegramController extends Controller
         $isMember = $this->getChatMember('@instagrampro2024', $chatId);
         if (!$isMember) {
             $this->sendMessage($chatId, 'please join channel @instagrampro2024');
-            return ;
+            return;
         }
 
         //-- keyboard
