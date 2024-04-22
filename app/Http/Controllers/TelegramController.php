@@ -34,6 +34,7 @@ class TelegramController extends Controller
         $isMember = $this->getChatMember('@instagrampro2024', $chatId);
         if (!$isMember) {
             $this->sendMessage($chatId, 'please join channel @instagrampro2024');
+            return ;
         }
 
         //-- keyboard
