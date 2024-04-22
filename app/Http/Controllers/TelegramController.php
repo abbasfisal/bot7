@@ -73,11 +73,11 @@ class TelegramController extends Controller
             'user_id' => $userId
         ]);
 
-        return false;
-//        if ($response['status'] == 'left') {
-//            return false;
-//        }
-//        return true;
+
+        if ($response['result']['status'] == 'left') {
+            return false;
+        }
+        return true;
     }
 
     public function sendMessage($chatId, $text, $keyboard = '')
