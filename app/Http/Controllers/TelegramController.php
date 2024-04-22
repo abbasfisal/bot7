@@ -31,7 +31,7 @@ class TelegramController extends Controller
         }
 
         //check member
-        $res =$this->getChatMember('instagrampro2024' , $chatId);
+        $res =$this->getChatMember('@instagrampro2024' , $chatId);
         Log::info('\n\t\t ---- channel member check -----\n' , [$res]);
         //-- keyboard
         $keyboard = $this->keyboard('button one');
