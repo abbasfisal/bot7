@@ -90,7 +90,7 @@ class TelegramController extends Controller
         ]);
 
 
-        if ($response['result']['status'] == 'left') {
+        if (isset($response['result']['status']) && $response['result']['status'] == 'left') {
             return false;
         }
         return true;
