@@ -58,8 +58,8 @@ class TelegramController extends Controller
                 $arzResponse = $this->arz('usd');
                 $this->editMessage($chatId, $messageId,
                     '🏦 currency ➡ USD'."\n".
-                    '📆 today  => ' . $arzResponse['jdate'] . "\n" .
-                    '💵 sell rate => ' . $arzResponse['price'],
+                    '📆 today  ➡ ' . $arzResponse['jdate'] . "\n" .
+                    '💵 sell rate ➡ ' . $arzResponse['price'],
                     $inlineKeyboard);
             }
             if ($data == 'eur') {
