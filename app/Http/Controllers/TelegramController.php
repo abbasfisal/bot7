@@ -31,8 +31,11 @@ class TelegramController extends Controller
         }
 
         //check member
-        $res =$this->getChatMember('@instagrampro2024' , $chatId);
-        Log::info('\n\t\t ---- channel member check -----\n' , [$res]);
+        $isMember = $this->getChatMember('@instagrampro2024', $chatId);
+        if (!$isMember) {
+            $this->sendMessage($chatId, 'please join channel @instagrampro2024');
+        }
+
         //-- keyboard
         $keyboard = $this->keyboard('button one');
         //----
@@ -62,12 +65,17 @@ class TelegramController extends Controller
 
     }
 
-    public function getChatMember($channelId, $userId)
+    public function getChatMember($channelId, $userId): bool
     {
-        return $this->callBot('getChatMember', [
+        // status=left , status=member , status=creator
+        $response = $this->callBot('getChatMember', [
             'chat_id' => $channelId,
             'user_id' => $userId
         ]);
+        if ($response['status'] == 'left') {
+            return false;
+        }
+        return true;
     }
 
     public function sendMessage($chatId, $text, $keyboard = '')
