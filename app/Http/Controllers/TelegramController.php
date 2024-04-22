@@ -56,17 +56,15 @@ class TelegramController extends Controller
         if (isset($data)) {
             if ($data == 'usd') {
                 $arzResponse = $this->arz('usd');
-                $usd =$arzResponse['price'];
-                $jdate =$arzResponse['jdate'];
                 $this->editMessage($chatId, $messageId,
-                    '📆 today  => ' . $arzResponse['jdate'] ."\n".
+                    '📆 today  => ' . $arzResponse['jdate'] . "\n" .
                     '💵 sell rate => ' . $arzResponse['price'],
                     $inlineKeyboard);
             }
             if ($data == 'eur') {
                 $arzResponse = $this->arz('eur');
                 $this->editMessage($chatId, $messageId,
-                    '📆 today  => ' . $arzResponse['jdate'] .'\n'.
+                    '📆 today  => ' . $arzResponse['jdate'] . "\n" .
                     '💷 sell rate => ' . $arzResponse['price'],
                     $inlineKeyboard);
                 //$this->deleteMessage($chatId, $messageId);
@@ -175,7 +173,7 @@ class TelegramController extends Controller
     public function arz($field)
     {
         $response = Http::get('https://www.megaweb.ir/api/money')->json();
-        Log::info("\n\n \t\t ---- arz response ----- \n" , [$response]);
+        Log::info("\n\n \t\t ---- arz response ----- \n", [$response]);
         if ($field == 'usd') {
             return $response['sell_usd'];
         }
