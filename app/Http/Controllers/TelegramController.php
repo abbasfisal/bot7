@@ -49,15 +49,17 @@ class TelegramController extends Controller
         //--- inline keyboard
         $inlineButton = [
             $this->inlineButton('USD Sell Rate', 'usd'),
-            $this->inlineButton('UER Sell Rate', 'uer'),
+            $this->inlineButton('UER Sell Rate', 'eur'),
         ];
         $inlineKeyboard = $this->inlineKeyboard($inlineButton);
 
         if (isset($data)) {
             if ($data == 'usd') {
                 $arzResponse = $this->arz('usd');
+                $usd =$arzResponse['price'];
+                $jdate =$arzResponse['jdate'];
                 $this->editMessage($chatId, $messageId,
-                    '📆 today  => ' . $arzResponse['jdate'] .'\n'.
+                    '📆 today  => ' . $arzResponse['jdate'] ."\n".
                     '💵 sell rate => ' . $arzResponse['price'],
                     $inlineKeyboard);
             }
