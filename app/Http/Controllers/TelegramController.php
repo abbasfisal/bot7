@@ -57,14 +57,14 @@ class TelegramController extends Controller
             if ($data == 'usd') {
                 $arzResponse = $this->arz('usd');
                 $this->editMessage($chatId, $messageId,
-                    '📆 today  => ' . $arzResponse['jdate'] .
+                    '📆 today  => ' . $arzResponse['jdate'] .'\n'.
                     '💵 sell rate => ' . $arzResponse['price'],
                     $inlineKeyboard);
             }
             if ($data == 'eur') {
                 $arzResponse = $this->arz('eur');
                 $this->editMessage($chatId, $messageId,
-                    '📆 today  => ' . $arzResponse['jdate'] .
+                    '📆 today  => ' . $arzResponse['jdate'] .'\n'.
                     '💷 sell rate => ' . $arzResponse['price'],
                     $inlineKeyboard);
                 //$this->deleteMessage($chatId, $messageId);
