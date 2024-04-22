@@ -42,23 +42,32 @@ class TelegramController extends Controller
         }
 
         //-- keyboard
-        $keyboard = $this->keyboard('button one');
+//        $keyboard = $this->keyboard('button one');
         //----
-        $this->sendMessage($chatId, 'button1', $keyboard);
+//        $this->sendMessage($chatId, 'button1', $keyboard);
 
         //--- inline keyboard
         $inlineButton = [
-            $this->inlineButton('update me', 'update'),
-            $this->inlineButton('delete me', 'delete'),
+            $this->inlineButton('USD Sell Rate', 'usd'),
+            $this->inlineButton('UER Sell Rate', 'uer'),
         ];
         $inlineKeyboard = $this->inlineKeyboard($inlineButton);
 
         if (isset($data)) {
-            if ($data == 'update') {
-                $this->editMessage($chatId, $messageId, 'updated ', $inlineKeyboard);
+            if ($data == 'usd') {
+                $arzResponse = $this->arz('usd');
+                $this->editMessage($chatId, $messageId,
+                    '📆 today  => ' . $arzResponse['jdate'] .
+                    '💵 sell rate => ' . $arzResponse['price'],
+                    $inlineKeyboard);
             }
-            if ($data == 'delete') {
-                $this->deleteMessage($chatId, $messageId);
+            if ($data == 'eur') {
+                $arzResponse = $this->arz('eur');
+                $this->editMessage($chatId, $messageId,
+                    '📆 today  => ' . $arzResponse['jdate'] .
+                    '💷 sell rate => ' . $arzResponse['price'],
+                    $inlineKeyboard);
+                //$this->deleteMessage($chatId, $messageId);
             }
         }
         //----
@@ -161,4 +170,12 @@ class TelegramController extends Controller
         return ($file);
     }
 
+    public function arz($field)
+    {
+        $response = Http::get('https://www.megaweb.ir/api/money')->json();
+        if ($field == 'usd') {
+            return $response['sell_usd'];
+        }
+        return $response['sell_eur'];
+    }
 }
