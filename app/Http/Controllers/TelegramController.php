@@ -57,7 +57,7 @@ class TelegramController extends Controller
             if ($data == 'usd') {
                 $arzResponse = $this->arz('usd');
                 $this->editMessage($chatId, $messageId,
-                    '🏦 currency ➡ USD'."\n".
+                    '🏦 currency ➡ USD' . "\n" .
                     '📆 today  ➡ ' . $arzResponse['jdate'] . "\n" .
                     '💵 sell rate ➡ ' . $arzResponse['price'],
                     $inlineKeyboard);
@@ -65,7 +65,7 @@ class TelegramController extends Controller
             if ($data == 'eur') {
                 $arzResponse = $this->arz('eur');
                 $this->editMessage($chatId, $messageId,
-                    '🏦 currency ➡ EUR'."\n".
+                    '🏦 currency ➡ EUR' . "\n" .
                     '📆 today  ➡ ' . $arzResponse['jdate'] . "\n" .
                     '💷 sell rate ➡ ' . $arzResponse['price'],
                     $inlineKeyboard);
@@ -89,9 +89,10 @@ class TelegramController extends Controller
             'user_id' => $userId
         ]);
 
-
-        if (isset($response['result']['status']) && $response['result']['status'] == 'left') {
-            return false;
+        if (isset($response['result']['status'])) {
+            if ($response['result']['status'] == 'left') {
+                return false;
+            }
         }
         return true;
     }
