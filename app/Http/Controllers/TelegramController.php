@@ -30,7 +30,9 @@ class TelegramController extends Controller
             $chatId = $tData['message']['chat'] ['id'];
         }
 
-
+        //check member
+        $res =$this->getChatMember('instagrampro2024' , $chatId);
+        Log::info('\n\t\t ---- channel member check -----\n' , [$res]);
         //-- keyboard
         $keyboard = $this->keyboard('button one');
         //----
@@ -60,6 +62,14 @@ class TelegramController extends Controller
 
     }
 
+    public function getChatMember($channelId, $userId)
+    {
+        return $this->callBot('getChatMember', [
+            'chat_id' => $channelId,
+            'user_id' => $userId
+        ]);
+    }
+
     public function sendMessage($chatId, $text, $keyboard = '')
     {
         $this->callBot('sendMessage', [
@@ -73,6 +83,7 @@ class TelegramController extends Controller
     {
         $response = Http::post($this->url . $methodName, $data);
         Log::info("\n \t\t --- response $methodName ----\n", [$response->json()]);
+        return $response->json();
     }
 
 
