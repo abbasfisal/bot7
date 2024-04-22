@@ -73,7 +73,7 @@ class TelegramController extends Controller
         //----
         if (isset($message)) {
             if ($message == '/start') {
-                $this->sendMessage($chatId, 'welcome to your bot ;)', $inlineKeyboard);
+                $this->sendMessage($chatId, 'Select USD/UER ', $inlineKeyboard);
             }
         }
 
